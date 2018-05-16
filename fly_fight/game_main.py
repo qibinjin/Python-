@@ -1,4 +1,4 @@
-import pygame, sys, random, game_map, hero_plane, enemy_plane, game_score
+import pygame, sys, random, game_map, hero_plane, enemy_plane, game_score, time
 
 WINDOW_HEIGHT = 768
 WINDOW_WIDTH = 512
@@ -54,8 +54,13 @@ class GameWindow(object):
         for bullet in self.hero_plane.bullet_list:
             if bullet.is_shot:
                 self.window.blit(bullet.img, (bullet.img_rect[0], bullet.img_rect[1]))
+
         for enemy in self.enemy_plane_list:
+            for n in enemy.boom_list:
+                if  n.is_boom:
+                    self.window.blit(n.boom_img, (n.boom_img_rect[0], n.boom_img_rect[1]))
             self.window.blit(enemy.img, (enemy.img_rect[0], enemy.img_rect[1]))
+
 
         self.window.blit(self.game_score.text_obj, (5, 5))
 
@@ -84,7 +89,6 @@ class GameWindow(object):
         if keys_pressed[pygame.K_SPACE]:
             self.hero_plane.shot()
     def __update(self):
-
         pygame.display.update()
 
     def __bullet_hit_enemyplane(self):
@@ -98,11 +102,30 @@ class GameWindow(object):
 
                         bullet.is_shot = False
 
+                        enemy.boom()
+
                         enemy.reset()
 
                         self.__set_boom_sound()
 
-                        self.game_score.set_text_obj()
+                        self.game_score.set_text_obj(10)
+
+    def __enemyplane_hit_heroplane(self):
+
+        for enemy in self.enemy_plane_list:
+
+            if pygame.Rect.colliderect(enemy.img_rect, self.hero_plane.img_rect):
+
+                enemy.boom()
+
+                enemy.reset()
+
+                self.__set_boom_sound()
+
+                self.game_score.set_text_obj(-10)
+
+            if self.game_score.get_game_core() < 0:
+                self.__game_over()
 
     def __set_boom_sound(self):
 
@@ -126,6 +149,7 @@ class GameWindow(object):
             self.__event()
             self.__update()
             self.__bullet_hit_enemyplane()
+            self.__enemyplane_hit_heroplane()
 
 def main():
     game = GameWindow()

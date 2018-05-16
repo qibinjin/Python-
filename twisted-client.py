@@ -7,7 +7,7 @@ class TSClntProtocol(protocol.Protocol):
     def sendData(self):
         data = input('> ')
         if data:
-            print('...sending %s...' % data)
+            print('...sent %s...' % data)
             self.transport.write(data.encode('utf-8'))
         else:
             self.transport.loseConnection()

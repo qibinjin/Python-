@@ -38,6 +38,7 @@ class HeroPlane(object):
 
         for bullet in self.bullet_list:
             if not bullet.is_shot:
+
                 bullet.img_rect[0] = self.img_rect[0] + (self.img_rect[2] - bullet.img_rect[2])/2
                 bullet.img_rect[1] = self.img_rect[1] - bullet.img_rect[3]
 

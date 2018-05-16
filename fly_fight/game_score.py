@@ -10,10 +10,12 @@ class GameScore(object):
 
         self.text_obj = self.font.render('分数:0', 1, (255, 255, 255))
 
-    def set_text_obj(self):
-        GameScore.__game_score += 5
+    def set_text_obj(self, score):
+        GameScore.__game_score += score
         r = random.randint(0, 255)
         g = random.randint(0, 255)
         b = random.randint(0, 255)
 
         self.text_obj = self.font.render('分数:%d' % GameScore.__game_score, 1, (r, g, b))
+    def get_game_core(self):
+        return self.__game_score

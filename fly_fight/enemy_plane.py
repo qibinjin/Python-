@@ -1,4 +1,4 @@
-import pygame, random
+import pygame, random,enemy_boom
 
 WINDOW_HEIGHT = 768
 WINDOW_WIDTH = 512
@@ -11,9 +11,13 @@ class EnemyPlane(object):
 
         self.img = pygame.image.load('res/img-plane_' + self.num + '.jpg')
 
+
         self.img_rect = self.img.get_rect()
 
+        self.boom_list = [enemy_boom.EnemyBoom() for _ in range(5)]
+
         self.reset()
+
     def reset(self):
 
         self.img_rect[0] = random.randint(0, WINDOW_WIDTH - self.img_rect[2])
@@ -27,3 +31,13 @@ class EnemyPlane(object):
 
         if self.img_rect[1] > WINDOW_HEIGHT:
             self.reset()
+
+    def boom(self):
+        for n in self.boom_list:
+            if not n.is_boom:
+                n.boom_img_rect[0] = self.img_rect[0]
+                n.boom_img_rect[1] = self.img_rect[1]
+                n.is_boom = True
+                break
+            n.is_boom = False
+
