@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<ul>
+    {% for student in student_list %}
+    <li>{{ student.name }}
+        <ul>
+            {% for course in student.courses %}
+            <li>{{ course.name }}{{ course.students }}</li>
+            {% endfor %}
+        </ul></li>
+
+    {% endfor %}
+</ul>
+
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .form{width:400px; height:460px; background: #f2f2f2; padding:20px;margin:50px auto }
+        .aa{height:50px; font-size:26px; font-weight: bold; border-bottom:1px solid #ccc; margin-bottom: 10px}
+        .bb{width:240px; height:24px;}
+        .cc{margin-bottom:10px}
+        span{width:80px;}
+        textarea{resize: none}
+        .label{float: left; width:80px; text-align: right; }
+    </style>
+</head>
+<body>
+<div class="form">
+    <div class="aa">注册表单</div>
+    <form action="http://localhost:8080/regist.html" method="post">
+            <p class="cc">
+                <label class="label">姓名:&nbsp;&nbsp;</label>
+                <input type="text" class="bb" name="username" validateevent="true">
+            </p>
+
+            <p class="cc">
+                <label class="label">密码:&nbsp;&nbsp;</label>
+            <input type="password" class="bb" name="passwd" validateevent="true">
+            </p>
+
+            <p class="cc">
+                <input type="submit" style="margin-left:80px">
+                <input type="reset">
+            </p>
+    </form>
+</div>
+
+</body>
+</html>
